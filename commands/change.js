@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 
-// COMMAND TO EDIT NAME / AVATAR OF BOT //
 
+/// EDITS USERNAME / AVATAR OF BOT ///
 module.exports = {
-    // COMMAND PARAMS //
+    /// Command Params
     data : new SlashCommandBuilder()
         .setName('change')
         .setDescription('Change Lyra')
@@ -15,7 +15,7 @@ module.exports = {
                 .setDescription('Lyra\'s New Avatar'))
         .setDMPermission(false),
 
-    // COMMAND EXECUTION //
+    /// Command Execution
     async execute(interaction) {
         let name = await interaction.options.getString('name')
         let avatar = await interaction.options.getAttachment('avatar')

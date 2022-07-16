@@ -1,9 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 
-// COMMAND TO EDIT NAME POST OF BOT //
-
+/// EDITS POST FROM BOT ///
 module.exports = {
-    // COMMAND PARAMS //
+    /// Command Params
     data: new SlashCommandBuilder()
         .setName('edit')
         .setDescription('Edit Lyra\'s Announcement')
@@ -17,7 +16,7 @@ module.exports = {
                 .setRequired(true))
         .setDMPermission(false),
 
-    // COMMAND EXECUTION //
+    /// Command Execution
     async execute(interaction) {
         link = await interaction.options.getString('link')
         content = await interaction.options.getString('announcement')

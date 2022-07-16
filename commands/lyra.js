@@ -1,9 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
-// COMMAND TO MAKE A BOT ANNOUNCEMENT //
-
+/// MAKES AN ANNOUNCEMENT POST FROM BOT ///
 module.exports = {
-    // COMMAND PARAMS //
+    /// Command Params
 	data: new SlashCommandBuilder()
 		.setName('lyra')
 		.setDescription('Lyra Announcement')
@@ -18,7 +17,7 @@ module.exports = {
         .setDMPermission(false)
         .setDefaultMemberPermissions(),
 
-    // COMMAND EXECUTION //
+    /// Command Execution
 	async execute(interaction) {
 		let content = await interaction.options.getString('announcement')
         let channel = await interaction.options.getChannel('channel')
