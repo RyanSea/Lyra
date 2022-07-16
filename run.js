@@ -33,9 +33,9 @@ bot.on('interactionCreate', async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		await bot.users.cache.get('814847668706082837').send(String(error))
-		
+		console.log('Top level error:', error)
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await bot.users.cache.get('814847668706082837').send(String(error))
 	}
 });
 

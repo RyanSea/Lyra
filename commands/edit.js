@@ -33,8 +33,9 @@ module.exports = {
             await message.edit(content)
             await interaction.reply('Announcement Edited✨')
         } catch (error){
-            await interaction.client.users.cache.get('814847668706082837').send(String(error))
+            console.log("edit.js error:" ,error)
             await interaction.reply('Please enter the link of a valid Lyra announcement')
+            await interaction.client.users.cache.get('814847668706082837').send(String(error))
         } 
     }
 }

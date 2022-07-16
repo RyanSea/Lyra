@@ -20,6 +20,8 @@ module.exports = {
         let name = await interaction.options.getString('name')
         let avatar = await interaction.options.getAttachment('avatar')
 
+        console.log([name, avatar ? avatar.proxyURL : avatar])
+
         if (name) {
             try {
                 await interaction.client.user.setUsername(name)
@@ -30,11 +32,13 @@ module.exports = {
                     return
                 } 
             } catch (error) {
-                await interaction.client.users.cache.get('814847668706082837').send(String(error))
-
+                console.log('Failed to change name error:', error)
                 interaction.reply('You\'re changing the username too fast!')
+                await interaction.client.users.cache.get('814847668706082837').send(String(error))
+                console.log('foo')
                 return
             }
+            console.log('bar')
         }
         
         if (avatar && avatar.contentType.startsWith('image')) {
@@ -48,9 +52,9 @@ module.exports = {
                 }
                 
             } catch (error) {
-                await interaction.client.users.cache.get('814847668706082837').send(String(error))
-
+                console.log("Failed to change avatar:", error)
                 await interaction.reply('You\'re changing the avatar too fast!')
+                await interaction.client.users.cache.get('814847668706082837').send(String(error))
             }
         } else if (avatar && !avatar.contentType.startsWith('image')) {
             await interaction.reply('Please upload a valid image')
