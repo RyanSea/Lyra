@@ -20,8 +20,6 @@ module.exports = {
         let name = await interaction.options.getString('name')
         let avatar = await interaction.options.getAttachment('avatar')
 
-        console.log([name, avatar ? avatar.proxyURL : avatar])
-
         if (name) {
             try {
                 await interaction.client.user.setUsername(name)
@@ -35,10 +33,8 @@ module.exports = {
                 await interaction.client.users.cache.get('814847668706082837').send(String(error))
 
                 interaction.reply('You\'re changing the username too fast!')
-                console.log('foo')
                 return
             }
-            console.log('bar')
         }
         
         if (avatar && avatar.contentType.startsWith('image')) {
