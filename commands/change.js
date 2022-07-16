@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
-fs = require('fs');
+const fs = require('fs');
 let log = fs.createWriteStream('logs/lyra_log.log') 
 let err = fs.createWriteStream('lyra_err.log') 
 
