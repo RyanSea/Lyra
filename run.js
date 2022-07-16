@@ -9,7 +9,6 @@ bot.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-const fs = require('fs');
 let log = fs.createWriteStream('logs/lyra_log.log') 
 let err = fs.createWriteStream('lyra_err.log') 
 
