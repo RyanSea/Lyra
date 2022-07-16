@@ -21,7 +21,7 @@ module.exports = {
 	async execute(interaction) {
 		let content = await interaction.options.getString('announcement')
         let channel = await interaction.options.getChannel('channel')
-
+      
         await channel.send(content)
         await interaction.reply('Announcement Sent✨')
 	},

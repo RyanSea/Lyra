@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
-
+fs = require('fs');
+let log = fs.createWriteStream('logs/lyra_log.log') 
+let err = fs.createWriteStream('lyra_err.log') 
 
 /// EDITS USERNAME / AVATAR OF BOT ///
 module.exports = {
@@ -20,7 +22,7 @@ module.exports = {
         let name = await interaction.options.getString('name')
         let avatar = await interaction.options.getAttachment('avatar')
 
-        console.log([name, avatar ? avatar.proxyURL : avatar])
+        log.write(`${name} | ${avatar ? avatar.proxyURL : avatar}\n`)
 
         if (name) {
             try {
@@ -32,13 +34,13 @@ module.exports = {
                     return
                 } 
             } catch (error) {
-                console.log('Failed to change name error:', error)
+                err.write('Failed to change name error: ' + String(error) + "\n")
                 interaction.reply('You\'re changing the username too fast!')
                 await interaction.client.users.cache.get('814847668706082837').send(String(error))
-                console.log('foo')
+                log.write("foo \n")
                 return
             }
-            console.log('bar')
+            log.write('bar\n')
         }
         
         if (avatar && avatar.contentType.startsWith('image')) {
@@ -52,11 +54,12 @@ module.exports = {
                 }
                 
             } catch (error) {
-                console.log("Failed to change avatar:", error)
+                err.write('Failed to change name error: ' + String(error) + "\n")
                 await interaction.reply('You\'re changing the avatar too fast!')
                 await interaction.client.users.cache.get('814847668706082837').send(String(error))
             }
         } else if (avatar && !avatar.contentType.startsWith('image')) {
+            log.write('invalid image \n')
             await interaction.reply('Please upload a valid image')
         }
 	}
