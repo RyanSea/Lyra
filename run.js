@@ -9,8 +9,8 @@ bot.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-let log = fs.createWriteStream('logs/lyra_log.log') 
-let err = fs.createWriteStream('lyra_err.log') 
+
+
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
@@ -36,7 +36,6 @@ bot.on('interactionCreate', async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		err.write('Top level error:' + String(error) + "\n")
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		await bot.users.cache.get('814847668706082837').send(String(error))
 	}

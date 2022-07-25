@@ -26,6 +26,7 @@ module.exports = {
         let image = await interaction.options.getAttachment('image')
         
         if (image) {
+            console.log(image)
             await channel.send({content: announcement, files: [image]})
         } else {
             await channel.send(announcement)
