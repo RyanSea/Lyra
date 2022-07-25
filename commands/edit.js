@@ -17,12 +17,16 @@ module.exports = {
             option.setName('announcement')
                 .setDescription('New Announcement Content')
                 .setRequired(true))
+        .addAttachmentOption(option => 
+            option.setName('image')
+                .setDescription('Announcement Image'))
         .setDMPermission(false),
 
     /// Command Execution
     async execute(interaction) {
-        link = await interaction.options.getString('link')
-        content = await interaction.options.getString('announcement')
+        let link = await interaction.options.getString('link')
+        let announcement = await interaction.options.getString('announcement')
+        let image = await interaction.options.getAttachment('image')
         
         // Grab guild id, channel id , and message id from link
         let [guild, channel, message] = link.slice(29).split('/')
@@ -33,8 +37,13 @@ module.exports = {
             channel = await guild.channels.cache.get(channel)
             message = await channel.messages.fetch(message)
 
-            await message.edit(content)
+            if (image) {
+                await channel.send({content: announcement, files: [image]})
+            } else {
+                await channel.send(announcement)
+            }
             await interaction.reply('Announcement Edited✨')
+
         } catch (error){
             err.write("edit.js error:" + String(error) + "\n")
             await interaction.reply('Please enter the link of a valid Lyra announcement')
